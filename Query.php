@@ -390,7 +390,7 @@ class Query extends CComponent
 					)
 				){
 					$value = (int)$value;
-				} elseif(preg_match('@[0-9]*(\.[0-9]+)?@si',$value)){
+				} elseif(preg_match('@^[0-9]*\.[0-9]+$@',$value)){
 					$value=(float)$value;
 				}
 			}
