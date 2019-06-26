@@ -132,7 +132,7 @@ class Query extends CComponent
 	
 	public function andCondition($condition)
 	{
-		$this->_condition = CMap::mergeArray($condition, $this->_condition);
+		$this->_condition = CMap::mergeArray($this->_condition, $condition);
 		return $this;
 	}
 	
