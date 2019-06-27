@@ -2,6 +2,7 @@
 
 namespace sammaye\mongoyii;
 
+use MongoDB\BSON\ObjectId;
 use MongoDB\Driver\Cursor as DriverCursor;
 
 use IteratorIterator;
@@ -139,11 +140,20 @@ class Cursor implements Iterator, Countable
 	}
 
 	/**
-	 * Get the current key (_id)
-	 * @return mixed|string
+	 * Get the current key
+	 * @return mixed|string _id for current item if it is ObjectID or scalar, otherwise index
 	 */
 	public function key()
 	{
+		if (isset($this->current->_id)) {
+			$key = $this->current->_id;
+			if ($key instanceof ObjectId) {
+				return (string) $key;
+			}
+			if (is_scalar($key)) {
+				return $key;
+			}
+		}
 		return $this->cursor->key();
 	}
 
