@@ -94,7 +94,7 @@ class Cursor implements Iterator, Countable
 		));
 	}
 
-	public function count()
+	public function count(): int
 	{
 		throw new Exception('Count can no longer be done on the cursor!!');
 	}
@@ -116,7 +116,7 @@ class Cursor implements Iterator, Countable
 	 * @return EMongoDocument|mixed
 	 * @throws EMongoException
 	 */
-	public function current()
+	public function current(): mixed
 	{
 		if($this->model === null){
 			return $this->current = $this->cursor->current();
@@ -131,19 +131,18 @@ class Cursor implements Iterator, Countable
 
 	/**
 	 * Reset the MongoCursor to the beginning
-	 * @return EMongoCursor
+	 * @return void
 	 */
-	public function rewind()
+	public function rewind(): void
 	{
 		$this->cursor->rewind();
-		return $this;
 	}
 
 	/**
 	 * Get the current key
 	 * @return mixed|string _id for current item if it is ObjectID or scalar, otherwise index
 	 */
-	public function key()
+	public function key(): mixed
 	{
 		if (isset($this->current->_id)) {
 			$key = $this->current->_id;
@@ -160,7 +159,7 @@ class Cursor implements Iterator, Countable
 	/**
 	 * Move the pointer forward
 	 */
-	public function next()
+	public function next(): void
 	{
 		$this->cursor->next();
 	}
@@ -169,7 +168,7 @@ class Cursor implements Iterator, Countable
 	 * Check if this position is a valid one in the cursor
 	 * @return bool
 	 */
-	public function valid()
+	public function valid(): bool
 	{
 		return $this->cursor->valid();
 	}
